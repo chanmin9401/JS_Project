@@ -1,14 +1,13 @@
-### JS_Project
+## JS_Project
 
 #### Project for studying about JavaScript
 
-#### VanillaJs Project
+### VanillaJs Project
 
-#### React Project
+### React Project
 
-
-##### In WordRelay
-###### add ignore file to reduce repository occupying percentage
+#### In WordRelay
+##### add ignore file to reduce repository occupying percentage
 
 ##### To init node module
 ##### 1. npm init
