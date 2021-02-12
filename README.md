@@ -9,7 +9,7 @@
 #### In WordRelay
 ##### add ignore file to reduce repository occupying percentage
 
-##### To init node module
+#### To init node module
 ##### 1. npm init
 ##### 2. npm i react react-dom
 ##### 3. npm i -D webpack webpack-cli
