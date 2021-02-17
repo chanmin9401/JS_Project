@@ -1,6 +1,6 @@
-## JS_Project
+# JS_Project
 
-#### Project for studying about JavaScript
+* Project for studying about JavaScript
 
 ### VanillaJs Project
 
