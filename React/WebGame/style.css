@@ -1,0 +1,12 @@
+.exp{
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.tab{
+    display:inline-block;
+    width:100px;
+    font-weight: bolder;
+    font-size: large;
+    margin-bottom: 15px;
+}
