@@ -64,4 +64,52 @@ npm i -D [moduleName]   -- 기존에 작성된 package.json이 있다면 새로 
 }
 ```
 > 위와 같이 설정 시 npm run dev 명령어를 통해 webpack과 server를 실행 가능</br></br>
-  * webpack.config.js
+#### webpack.config.js
+##### KeyProperties - entry, module, plugins, output
++ entry</br>
+```
+resolve : {
+    extensions: ['.js', '.jsx', '.css']
+},
+entry : {
+    app:['./client']
+}
+```
+> entry는 webpack이 병합작업에 필요로하는 script 파일의 목록을 선언</br></br>
+> 확장자를 매번 입력하는 것이 번거로운 경우 resolve를 선언하여 확장자를 관리</br></br>
++ module</br>
+```
+module: {
+    rules : [{
+        test : /\.jsx?/,
+        loader: 'babel-loader',
+        options: {
+            presets:[
+                ['@babel/preset-env',{
+                    targets : {
+                        browsers : ['> 1% in KR']    // preset을 적용할 브라우저의 종류를 정의할 수 있다.
+                    }
+                }],
+                '@babel/preset-react'],   // plugin들의 모음이 preset
+            plugins:[
+                '@babel/plugin-proposal-class-properties',
+                'react-refresh/babel'
+            ]
+        }
+    },{
+        test : /\.css$/,
+        use: ['style-loader', 'css-loader'],
+    }],
+},
+```
+> babel관련 모듈을 설치 후 presets, plugins의 options를 선언하여 활용 가능</br></br>
++ plugins</br>
+> Hot Reloading과 같은 개발에 필요한 plugin 적용 시 optional하게 명시하여 사용</br></br>
++ output</br>
+```
+output: {
+    path : path.join(__dirname, 'dist'),
+    filename : 'app.js'
+}
+```
+> entry에 명시된 항목들을 모아서 module에 선언된 규칙을 거쳐 output의 [output.path/output.filename]에 하나의 script로 병합</br></br>
