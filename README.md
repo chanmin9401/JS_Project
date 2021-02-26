@@ -113,3 +113,51 @@ output: {
 }
 ```
 > entry에 명시된 항목들을 모아서 module에 선언된 규칙을 거쳐 output의 [output.path/output.filename]에 하나의 script로 병합</br></br>
+
++ 숫자야구
+> Import VS. Require?!</br></br>
+> import, export는 react에서 주로 사용, Require는 node에서 주로 사용</br>
+> babel이 import, export와 require를 호환시켜주는 역할을 수행</br>
+> webpack.config.js같은 node가 실행하는 설정파일에서는 import를 사용할 경우 에러가 발생</br></br>
+> Map을 이용하여 리스트를 반복문으로 생성가능</br>
+```
+<ul>
+    {[
+        {key : '1', value : '사과'},
+        {key : '2', value : '귤'},
+        {key : '3', value : '배'}
+    ].map((item) => {
+        return(
+            <li>{item.key}. {item.value}</li>
+        );
+    })}
+</ul>
+```
+> 이때 li 태그에 key속성을 unique ID로 부여하지 않으면 경고메세지가 출력</br>
+> React는 각각의 컴포넌트들을 key로 구분하므로 가능한 key속성을 부여하는것이 바람직</br></br>
++ Props
+> 부모가 자식 컴포넌트를 import하여 사용할 때 props라는 형태로 parameter를 보내줄 수 있다.</br>
+> 이때 부모의 parameter를 자식의 자식에게 전달하거나 자식의 자식의 자식의... 등 점점 깊어지는 경우 굉장히 복잡해짐</br>
+> 이를 위해 Redux나 React Context를 활용하여 global state를 관리하는 것이 개발, 유지 보수에 용이</br></br>
+
++ state의 array객체 조작 시 유의사항
+> React가 state의 변화를 감지하는 시점에 render()를 다시 실행</br>
+```
+state = {
+    array : []
+}
+this.setState({
+    array.push(1)
+})
+```
+> 위와 같이 현재 state의 참조값이 변하지 않은 상태에서 push()를 통해 값을 넣으면</br>
+> 기존 state의 array에도 1이 추가된 상태가 되므로 React가 변화를 감지하지 못하여 render()를 실행하지 않음</br>
+```
+state = {
+    array : []
+}
+this.setState({
+    array : [...this.state.array,1]
+})
+```
+> 따라서 위와 같이 새로운 배열을 만들어서 참조하게 한 후 React가 변화를 감지할 수 있도록 수정해야함
