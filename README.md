@@ -119,3 +119,20 @@ output: {
 > import, export는 react에서 주로 사용, Require는 node에서 주로 사용</br>
 > babel이 import, export와 require를 호환시켜주는 역할을 수행</br>
 > webpack.config.js같은 node가 실행하는 설정파일에서는 import를 사용할 경우 에러가 발생</br></br>
+> Map을 이용하여 리스트를 반복문으로 생성가능</br>
+```
+<ul>
+    {[
+        {key : '1', value : '사과'},
+        {key : '2', value : '귤'},
+        {key : '3', value : '배'}
+    ].map((item) => {
+        return(
+            <li>{item.key}. {item.value}</li>
+        );
+    })}
+</ul>
+```
+> 이때 li 태그에 key속성을 unique ID로 부여하지 않으면 경고메세지가 출력</br>
+> React는 각각의 컴포넌트들을 key로 구분하므로 가능한 key속성을 부여하는것이 바람직
+
