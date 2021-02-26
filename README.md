@@ -113,3 +113,9 @@ output: {
 }
 ```
 > entry에 명시된 항목들을 모아서 module에 선언된 규칙을 거쳐 output의 [output.path/output.filename]에 하나의 script로 병합</br></br>
+
++ 숫자야구
+> Import VS. Require?!</br></br>
+> import, export는 react에서 주로 사용, Require는 node에서 주로 사용</br>
+> babel이 import, export와 require를 호환시켜주는 역할을 수행</br>
+> webpack.config.js같은 node가 실행하는 설정파일에서는 import를 사용할 경우 에러가 발생</br></br>
