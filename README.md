@@ -134,5 +134,9 @@ output: {
 </ul>
 ```
 > 이때 li 태그에 key속성을 unique ID로 부여하지 않으면 경고메세지가 출력</br>
-> React는 각각의 컴포넌트들을 key로 구분하므로 가능한 key속성을 부여하는것이 바람직
+> React는 각각의 컴포넌트들을 key로 구분하므로 가능한 key속성을 부여하는것이 바람직</br></br>
++ Props
+> 부모가 자식 컴포넌트를 import하여 사용할 때 props라는 형태로 parameter를 보내줄 수 있다.</br>
+> 이때 부모의 parameter를 자식의 자식에게 전달하거나 자식의 자식의 자식의... 등 점점 깊어지는 경우 굉장히 복잡해짐</br>
+> 이를 위해 Redux나 React Context를 활용하여 global state를 관리하는 것이 개발, 유지 보수에 용이 
 
