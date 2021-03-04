@@ -9,12 +9,14 @@ import {module1Event} from './Module1.js';
 import {module2Event_1,module2Event_2} from './Module2.js';
 
 let init = function(){
+    // Module1.js, Module2.js에서 받아온 함수 버튼 이벤트에 연결
     let button_module1 = document.getElementById('linkToModule1');
     button_module1.addEventListener('click', module1Event);
     
     let button_module2 = document.getElementById('linkToModule2');
     button_module2.addEventListener('click', module2Event_1);
-
+    
+    // Module2.js에서 받아온 함수 실행
     let sum = module2Event_2(1,2);
     console.log(sum);
 }
