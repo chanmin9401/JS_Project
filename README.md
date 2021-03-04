@@ -4,6 +4,31 @@
 
 ## VanillaJs Project
 
++ JS Module 실습
+> ES6의 Module 시스템을 다루어보기 위한 프로젝트</br></br>
+> package.json 파일로 설정을 한다면 'type : module'을 선언한 후 Module 활용</br></br>
+> 혹은,</br>
+```
+    <script type="module" src="Module_comp.js"></script>
+```
+> 위와 같이 html에 선언한 script tag에 type="module"로 선언 가능</br></br>
+> import * from './Module.js'로 하나의 모듈 파일을 가져오는 경우,</br></br>
+> 로컬환경에서는 CORS error가 발생할 수 있다.</br></br>
+
++ CORS error?
+> 서로 다른 출처로부터 리소스가 공유될 경우 웹 페이지에서 보안상의 이유로 리소스의 로드를 제한하는 현상</br></br>
+> Local 환경에서 하나의 html을 열고, script를 호출하는 경우,</br></br>
+> script들이 동일한 폴더하에 존재하므로 CORS error가 발생하지 않지만,</br></br>
+> ES6 Module을 사용하려고 하면 브라우저가 import하려는 module의 출처를 알 수 없다고 판단하여 CORS error를 발생</br></br>
+> 이를 해결 하기 위해 npm http-server를 활용하면 실습에 용이</br></br>
+```
+npm http-server -g  --글로벌 선언을 하여 어디서나 사용할 수 있게
+npx http-server  --  해당 프로젝트에 들어가서 서버를 기동
+```
+> 위 과정을 거치면</br></br>
+http://127.0.0.1:8080
+> 위의 주소로 현재 프로젝트의 소스를 접근할 수 있음</br></br>
+> 위 과정을 거쳐서 실행하면 CORS error없이 Module과 관련된 실습이 가능</br></br>
 ***
 
 ## React Project
