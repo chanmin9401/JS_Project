@@ -185,4 +185,32 @@ this.setState({
     array : [...this.state.array,1]
 })
 ```
-> 따라서 위와 같이 새로운 배열을 만들어서 참조하게 한 후 React가 변화를 감지할 수 있도록 수정해야함
+> 따라서 위와 같이 새로운 배열을 만들어서 참조하게 한 후 React가 변화를 감지할 수 있도록 수정해야함</br></br>
+
++ Rendering 제어
+> component의 state가 변경되는 이벤트가 발생될때마다 render()를 호출하게 되어 성능저하의 원인이 될 수 있음</br></br>
+> 이때 class 방식의 경우 shouldComponentUpdate라는 React함수를 활용하여 불필요한 rendering을 제어 가능
+```
+    shouldComponentUpdate(nextProps, nextState, nextContext){
+        ... add Logic
+    }
+```
+> .C.U 함수에 이전 state와 이벤트가 일어난 현재시점의 state가 다른 경우에만 render()를 호출하도록 로직을 추가하면 불필요한 rendering을 제어 가능 </br></br>
++ PureComponent, memo
+> 굳이 s.C.U 함수를 선언하여 세세한 제어가 필요하지 않은 경우, PureComponent를 활용해도 동일하게 동작
+```
+    import { Component } from 'react'
+    class Try extends Component {       -- 이걸
+    
+    import { PureComponent } from 'react'
+    class Try extends PureComponent {   -- 이렇게
+```
+> 이렇게 변경하면 세세한 rendering 제어 로직을 구현할 수는 없지만, 따로 명시하지 않아도 state간 변경점을 탐지하여 rendering을 자동으로 제어</br></br>
+> hooks의 경우 
+```
+    import { memo } from 'react'
+    const Try = memo(() => {
+           ...
+    });
+```
+> react의 memo를 import해서 사용하면 PureComponent와 유사한 기능을 제공</br></br>
