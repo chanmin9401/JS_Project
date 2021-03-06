@@ -3,6 +3,7 @@ const { useState } = React;
 const WordRelay = require('./WordRelay');
 const GuGudan = require('./GuGudan');
 const NumberBaseBall = require('./NumberBaseBall');
+const RSP = require('./RSP');
 const {} = require('./style')
 
 const WebGame = () => {
@@ -16,6 +17,8 @@ const WebGame = () => {
             setTabCode('GuGudan');
         }else if(tabCd === 'NBB'){
             setTabCode('NumberBaseBall');
+        }else if(tabCd === 'RSP'){
+            setTabCode('RSP');
         }
     }
 
@@ -25,9 +28,11 @@ const WebGame = () => {
         <div className='tab' onClick={() => onClickTab('WR')}>끝말잇기</div>
         <div className='tab'onClick={() => onClickTab('GG')}>구구단</div>
         <div className='tab'onClick={() => onClickTab('NBB')}>숫자야구</div>
+        <div className='tab'onClick={() => onClickTab('RSP')}>가위바위보</div>
             {tabCode === 'WordRelay' && <WordRelay />}
             {tabCode === 'GuGudan' && <GuGudan />}
             {tabCode === 'NumberBaseBall' && <NumberBaseBall />}
+            {tabCode === 'RSP' && <RSP />}
         </>
     );
 }
