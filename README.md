@@ -8,7 +8,7 @@
 > ES6의 Module 시스템을 다루어보기 위한 프로젝트</br></br>
 > package.json 파일로 설정을 한다면 'type : module'을 선언한 후 Module 활용</br></br>
 > 혹은,</br>
-```
+```html
     <script type="module" src="Module_comp.js"></script>
 ```
 > 위와 같이 html에 선언한 script tag에 type="module"로 선언 가능</br></br>
@@ -44,7 +44,7 @@ http://127.0.0.1:8080
 > class와 hooks를 이용하여 구구단 게임을 구현</br></br>
 > class 방식의 component 생성 시 this와 state에 대한 주의</br></br>
 > rendering 영역에서 onChange, onClick과 같은 event 제어 시 </br>
-```
+```javascript
 onchange = (e) => {
     this.setState({inputValue : e.target.value});
 }
@@ -131,7 +131,7 @@ module: {
 + plugins</br>
 > Hot Reloading과 같은 개발에 필요한 plugin 적용 시 optional하게 명시하여 사용</br></br>
 + output</br>
-```
+```javascript
 output: {
     path : path.join(__dirname, 'dist'),
     filename : 'app.js'
@@ -139,13 +139,15 @@ output: {
 ```
 > entry에 명시된 항목들을 모아서 module에 선언된 규칙을 거쳐 output의 [output.path/output.filename]에 하나의 script로 병합</br></br>
 
-+ 숫자야구
-> Import VS. Require?!</br></br>
+
++ Import VS. Require?!
 > import, export는 react에서 주로 사용, Require는 node에서 주로 사용</br>
 > babel이 import, export와 require를 호환시켜주는 역할을 수행</br>
 > webpack.config.js같은 node가 실행하는 설정파일에서는 import를 사용할 경우 에러가 발생</br></br>
+> 
++ 숫자야구
 > Map을 이용하여 리스트를 반복문으로 생성가능</br>
-```
+```javascript
 <ul>
     {[
         {key : '1', value : '사과'},
@@ -167,7 +169,7 @@ output: {
 
 + state의 array객체 조작 시 유의사항
 > React가 state의 변화를 감지하는 시점에 render()를 다시 실행</br>
-```
+```javascript
 state = {
     array : []
 }
@@ -177,7 +179,7 @@ this.setState({
 ```
 > 위와 같이 현재 state의 참조값이 변하지 않은 상태에서 push()를 통해 값을 넣으면</br>
 > 기존 state의 array에도 1이 추가된 상태가 되므로 React가 변화를 감지하지 못하여 render()를 실행하지 않음</br>
-```
+```javascript
 state = {
     array : []
 }
@@ -190,15 +192,15 @@ this.setState({
 + Rendering 제어
 > component의 state가 변경되는 이벤트가 발생될때마다 render()를 호출하게 되어 성능저하의 원인이 될 수 있음</br></br>
 > 이때 class 방식의 경우 shouldComponentUpdate라는 React함수를 활용하여 불필요한 rendering을 제어 가능
-```
+```javascript
     shouldComponentUpdate(nextProps, nextState, nextContext){
         ... add Logic
     }
 ```
-> .C.U 함수에 이전 state와 이벤트가 일어난 현재시점의 state가 다른 경우에만 render()를 호출하도록 로직을 추가하면 불필요한 rendering을 제어 가능 </br></br>
+> s.C.U 함수에 이전 state와 이벤트가 일어난 현재시점의 state가 다른 경우에만 render()를 호출하도록 로직을 추가하면 불필요한 rendering을 제어 가능 </br></br>
 + PureComponent, memo
 > 굳이 s.C.U 함수를 선언하여 세세한 제어가 필요하지 않은 경우, PureComponent를 활용해도 동일하게 동작
-```
+```javascript
     import { Component } from 'react'
     class Try extends Component {       -- 이걸
     
@@ -207,10 +209,62 @@ this.setState({
 ```
 > 이렇게 변경하면 세세한 rendering 제어 로직을 구현할 수는 없지만, 따로 명시하지 않아도 state간 변경점을 탐지하여 rendering을 자동으로 제어</br></br>
 > hooks의 경우 
-```
+```javascript
     import { memo } from 'react'
     const Try = memo(() => {
            ...
     });
 ```
 > react의 memo를 import해서 사용하면 PureComponent와 유사한 기능을 제공</br></br>
+
++ ReactLifeCycle
+> Class로 구현된 React Component는 다음과 같은 LifeCycle을 갖는다.</br></br>
+> **Constructor ->Render -> Ref -> componentDidMount 
+    -> (setState/ props 변경 시 -> shouldComponentUpdate(true) -> render -> componentDidUpdate)
+    -> componentWillUnmount -> 소멸**</br></br>
+> 이때, 각각의 단계에서 사용가능한 함수들이 있다.
+```javascript
+// 최초 rendering이 성공적으로 실행이 되면 호출되는 함수, 비동기 요청을 수행
+    componentDidMount(){
+        this.interval = setInterval(change, 100);
+    }
+    // rerendering 후 event처리
+    componentDidUpdate(){
+
+    }
+    // 컴포넌트가 제거되기 직전 호출되는 함수, 실행중인 비동기 요청을 해제
+    componentWillUnmount(){
+        clearInterval(this.interval);
+    }
+```
+> 이를 React Hooks로 변환하여 구현시, useEffect를 사용해야한다.
+```javascript
+    useEffect(() => {   // componentDidMount, componentDidUpdate의 역할 수행
+        ...
+        return () => { // componentWillUnmount의 역할 수행
+            ...
+        }
+    }, [state1]);
+```
+> 둘의 차이점은 **변화 인지의 관점**에 있다.</br></br>
+> Class기반의 변화 인지는 Mount완료 여부와 State의 변화를 감지하여 이루어지며, callBack함수의 종류는 다음과 같다.</br></br>
+> **componentDidMount** - 최초로 해당 component가 rendering되어 mount되는 시점에 호출되는 함수</br></br>
+> **componentDidUpdate** - 해당 Class의 state가 변하면 이를 감지하여 state의 변화 이후 처리를 위해 호출되는 함수</br></br>
+> **componentWillUnmount** - 해당 컴포넌트가 unMount되기 직전에 호출되는 함수</br></br>
+> React Hooks기반의 변화 인지는 state의 변화를 감지하여 이루어지며, react의 useEffect를 통해 callBack로직이 수행된다.</br></br>
+> useEffect의 로직은 componentDidMount, componentDidUpdate의 역할 수행하고, return 되는 함수의 로직은 componentWillUnmount의 역할 수행</br></br>
+> useEffect는 callBack함수 뿐만 아니라 배열을 두번째 인자로 받는데,
+```javascript
+    useEffect(() => {
+        ...
+    }, [state1]);           // state1의 변화만을 추적, componentDidUpdate기능과 유사
+    
+    useEffect(() => {
+        ...
+    }, [state2,state3]);    // state2와 state3의 변화를 동시에 추적, componentDidUpdate기능과 유사
+    
+    useEffect(() => {
+        ...
+    }, []);    // 인자가 없는 경우 최초 rendering될때 한번만 수행, componentDidMount기능과 유사
+```
+> 두번째 인자로 전달받은 state에 대한 전담 추적장치로 활용한다.
