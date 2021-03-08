@@ -55,7 +55,6 @@ class NumberBaseBall extends Component{
                     trial : [...this.state.trial, {try : this.state.inputValue, result : `${strike} 스트라이크! ${ball} 볼!`}],
                     inputValue : ''
                 });
-                console.log(this.state.trial) ;
             }
         }
     };
