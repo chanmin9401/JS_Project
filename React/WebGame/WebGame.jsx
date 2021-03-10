@@ -1,10 +1,11 @@
-const React = require('react');
-const { useState } = React;
-const WordRelay = require('./WordRelay');
-const GuGudan = require('./GuGudan');
-const NumberBaseBall = require('./NumberBaseBall');
-const RSP = require('./RSP');
 const {} = require('./style')
+
+import React,{useState} from 'react';
+import WordRelay from './WordRelay';
+import GuGudan from './GuGudan';
+import NumberBaseBall from './NumberBaseBall';
+import RSP from './RSP';
+import MS from './MinSearch/MineSearch';
 
 const WebGame = () => {
     const [tabCode, setTabCode] = useState('WordRelay');
@@ -19,6 +20,8 @@ const WebGame = () => {
             setTabCode('NumberBaseBall');
         }else if(tabCd === 'RSP'){
             setTabCode('RSP');
+        }else if(tabCd === 'MS'){
+            setTabCode('MS');
         }
     }
 
@@ -29,12 +32,14 @@ const WebGame = () => {
         <div className='tab'onClick={() => onClickTab('GG')}>구구단</div>
         <div className='tab'onClick={() => onClickTab('NBB')}>숫자야구</div>
         <div className='tab'onClick={() => onClickTab('RSP')}>가위바위보</div>
+        <div className='tab'onClick={() => onClickTab('MS')}>지뢰찾기</div>
             {tabCode === 'WordRelay' && <WordRelay />}
             {tabCode === 'GuGudan' && <GuGudan />}
             {tabCode === 'NumberBaseBall' && <NumberBaseBall />}
             {tabCode === 'RSP' && <RSP />}
+            {tabCode === 'MS' && <MS />}
         </>
     );
 }
 
-module.exports = WebGame;
+export default WebGame;
