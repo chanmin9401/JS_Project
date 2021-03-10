@@ -1,7 +1,7 @@
 // npm으로 설치한 react, react-dom 모듈을 불러와서 사용
-const React = require('react');
-const ReactDom = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-const WebGame = require('./WebGame');
+import WebGame from './WebGame';
 
-ReactDom.render(<WebGame />, document.querySelector('#root'));
+ReactDOM.render(<WebGame />, document.querySelector('#root'));

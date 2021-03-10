@@ -86,4 +86,4 @@ class NumberBaseBall extends Component{
     }
 }
 
-module.exports = NumberBaseBall;
+export default NumberBaseBall;
