@@ -268,3 +268,19 @@ this.setState({
     }, []);    // 인자가 없는 경우 최초 rendering될때 한번만 수행, componentDidMount기능과 유사
 ```
 > 두번째 인자로 전달받은 state에 대한 전담 추적장치로 활용한다.
++ useMemo, useEffect, useCallback
+```javascript
+    const A = useMemo(() => f(), [...]);
+    
+    useEffect(() => {
+        ...
+    }, [...]);
+    
+    const onChange = useCallback(e => {
+        const { name, value } = e.target;
+        setInputs({...inputs, [name]: value});
+    },[inputs]);
+```
+> useMemo는 연산된 값을 재사용하기 위해 사용, 불필요한 연산이 없이 변화가 있을때만 연산을 수행하도록 하며 최신 값을 기억</br>
+> useEffect는 state가 변경되거나 rendering이 수행될 때, 변화를 감지하여 수행</br>
+> useCallback는 특정함수를 재사용하기 위해 사용 </br>
